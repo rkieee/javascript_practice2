@@ -1,7 +1,3 @@
-//tasks1 = all tasks
-//tasks2 = tasks you are working on
-//tasks3 = tasks you have completed
-
 //Define UI Vars
 const taskTable = document.getElementById( 'task-content' );
 const addBtn = document.getElementById( 'btn-add' );
@@ -11,28 +7,28 @@ const doingRadio = document.getElementById( 'doing' );
 const doneRadio = document.getElementById( 'done' );
 
 //
-let tasks = [];
-
-const doingClass = 'doing';
-const doneClass = 'done';
+const tasks = [];
+//配列自体は再代入されない、再列内の要素の変化は配列自体の代入には無関係
 
 addBtn.addEventListener( 'click', addTask );
 
-
-function addTask() {
-  tasks.push( taskInput.value );
+function addTask(){
+const task = {
+    comment: taskInput.value,
+    status: 'doing'
+  };
+  tasks.push(task)
   const trEle = document.createElement( 'tr' );
-  const task = document.createElement( 'td' );
+  const taskEle = document.createElement( 'td' );
   const Id = document.createElement( 'td' );
   const statusBtn = document.createElement( 'button' );
   const removeBtn = document.createElement( 'button' );
-  task.innerHTML = taskInput.value;
+  taskEle.innerHTML = task.comment;
   Id.innerHTML += tasks.length - 1;
   statusBtn.innerHTML = '作業中';
-  statusBtn.setAttribute( 'value', 'doing' )
   removeBtn.innerHTML = '削除';
   trEle.appendChild( Id );
-  trEle.appendChild( task );
+  trEle.appendChild( taskEle );
   trEle.appendChild( statusBtn );
   trEle.appendChild( removeBtn );
   taskTable.appendChild( trEle );
@@ -80,4 +76,3 @@ function addTask() {
     }
   }
 }
-
